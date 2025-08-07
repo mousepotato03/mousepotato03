@@ -9,7 +9,7 @@ import argparse
 import re
 from typing import Optional
 from game_state import GameState, GameStatus
-from generate_svg import generate_svg_file
+from update_readme_text import update_readme_with_text_board
 
 
 class OmokGameHandler:
@@ -34,8 +34,8 @@ class OmokGameHandler:
                 print("Failed to save reset state")
                 return False
                 
-            if not generate_svg_file():
-                print("Failed to generate SVG after reset")
+            if not update_readme_with_text_board():
+                print("Failed to update README with text board after reset")
                 return False
                 
             print("Game reset successfully!")
@@ -105,9 +105,9 @@ class OmokGameHandler:
                 print("Failed to save game state")
                 return False
                 
-            # Generate updated SVG
-            if not generate_svg_file():
-                print("Failed to generate updated SVG")
+            # Update README with text board
+            if not update_readme_with_text_board():
+                print("Failed to update README with text board")
                 return False
                 
             # Print game status

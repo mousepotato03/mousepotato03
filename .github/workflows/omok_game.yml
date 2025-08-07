@@ -50,9 +50,7 @@ jobs:
       run: |
         python omok_game.py --move "$ISSUE_TITLE" --issue-number $ISSUE_NUMBER
         
-    - name: Update README with embedded SVG
-      run: |
-        python update_readme.py
+    # README is now updated automatically by omok_game.py
         
     - name: Commit and push changes
       env:

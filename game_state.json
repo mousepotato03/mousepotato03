@@ -37,7 +37,7 @@
     [
       "empty",
       "empty",
-      "empty",
+      "black",
       "empty",
       "empty",
       "empty",
@@ -256,12 +256,12 @@
       "empty"
     ]
   ],
-  "current_player": "black",
+  "current_player": "white",
   "game_status": "ongoing",
-  "move_count": 2,
+  "move_count": 3,
   "winner": null,
   "last_move": [
-    5,
-    1
+    2,
+    2
   ]
 }
