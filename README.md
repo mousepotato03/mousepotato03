@@ -11,7 +11,7 @@
 ### Current Game State
 
 <!-- The SVG board is rendered here by GitHub -->
-![Omok Game Board](https://raw.githubusercontent.com/mousepotato03/mousepotato03/main/board.svg?v=1754592057)
+![Omok Game Board](https://raw.githubusercontent.com/mousepotato03/mousepotato03/main/board.svg?v=1754592193)
 
 ### 📋 How to Play
 You can place a stone by creating a GitHub issue:

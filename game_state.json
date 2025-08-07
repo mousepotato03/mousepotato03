@@ -1,7 +1,7 @@
 {
   "board": [
     [
-      "empty",
+      "black",
       "empty",
       "empty",
       "empty",
@@ -256,9 +256,12 @@
       "empty"
     ]
   ],
-  "current_player": "black",
+  "current_player": "white",
   "game_status": "ongoing",
-  "move_count": 0,
+  "move_count": 1,
   "winner": null,
-  "last_move": null
+  "last_move": [
+    0,
+    0
+  ]
 }
