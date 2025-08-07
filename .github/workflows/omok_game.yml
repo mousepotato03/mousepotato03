@@ -50,6 +50,10 @@ jobs:
       run: |
         python omok_game.py --move "$ISSUE_TITLE" --issue-number $ISSUE_NUMBER
         
+    - name: Update README with cache-busting URL
+      run: |
+        python update_readme.py
+        
     - name: Commit and push changes
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
