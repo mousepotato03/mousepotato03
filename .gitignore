@@ -163,7 +163,6 @@ cython_debug/
 
 # Game specific files (keep these tracked)
 # game_state.json - track this for persistent game state
-# board.svg - track this for the game display
 
 # Claude Code settings
 settings.local.json
