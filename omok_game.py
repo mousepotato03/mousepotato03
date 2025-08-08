@@ -76,7 +76,7 @@ class OmokGameHandler:
             # Parse coordinates from issue title
             coords = self._parse_move_from_title(issue_title)
             if not coords:
-                print("Invalid move format. Expected format: 'Play at A,1' or similar")
+                print("Invalid move format. Expected format: 'A,1', 'A 1', 'A1', or 'Play at A,1'")
                 print("Valid coordinates: A-O (columns), 1-15 (rows)")
                 return False
                 
@@ -143,13 +143,14 @@ class OmokGameHandler:
         # Remove common prefixes and clean the title
         title = title.strip()
         
-        # Try different patterns to extract coordinates
+        # Try different patterns to extract coordinates (prioritize simple formats)
         patterns = [
+            r'([A-O]),\s*(\d+)',              # "A,1" (simple comma format)
+            r'([A-O])\s+(\d+)',               # "A 1" (space format)
+            r'([A-O])(\d+)',                  # "A1" (no separator)
             r'play\s+at\s+([A-O]),\s*(\d+)',  # "Play at A,1"
             r'move\s+([A-O]),\s*(\d+)',       # "Move A,1"
             r'place\s+([A-O]),\s*(\d+)',      # "Place A,1"
-            r'([A-O]),\s*(\d+)',              # "A,1"
-            r'([A-O])\s+(\d+)',               # "A 1"
         ]
         
         for pattern in patterns:
