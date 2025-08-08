@@ -146,36 +146,8 @@ class TextBoardGenerator:
         return f"```\n{board_text}\n```\n\n{status_text}"
 
 
-def generate_text_board_file() -> bool:
-    """
-    Generate and save the text board to a file.
-    
-    Returns:
-        bool: True if successful, False otherwise
-    """
-    try:
-        generator = TextBoardGenerator()
-        
-        # Generate the complete display
-        complete_display = generator.generate_complete_display()
-        
-        # Save to file
-        with open("board.txt", "w", encoding="utf-8") as f:
-            f.write(complete_display)
-            
-        print("Text board generated successfully: board.txt")
-        return True
-        
-    except Exception as e:
-        print(f"Error generating text board: {e}")
-        return False
-
-
 if __name__ == "__main__":
     # Test the generator
-    success = generate_text_board_file()
-    if success:
-        # Also print to console for debugging
-        generator = TextBoardGenerator()
-        print("\nGenerated board:")
-        print(generator.generate_complete_display())
+    generator = TextBoardGenerator()
+    print("\nGenerated board:")
+    print(generator.generate_complete_display())
