@@ -15,7 +15,7 @@
       "empty",
       "empty",
       "empty",
-      "empty"
+      "black"
     ],
     [
       "empty",
@@ -256,12 +256,12 @@
       "empty"
     ]
   ],
-  "current_player": "black",
+  "current_player": "white",
   "game_status": "ongoing",
-  "move_count": 4,
+  "move_count": 5,
   "winner": null,
   "last_move": [
-    7,
-    7
+    0,
+    14
   ]
 }
