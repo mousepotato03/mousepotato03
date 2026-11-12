@@ -13,8 +13,8 @@ class ReadmeUpdater:
     """Updates README.md with current game board in text format."""
     
     README_FILE = "README.md"
-    BOARD_START_MARKER = "### Current Game State"
-    BOARD_END_MARKER = "### 📋 How to Play"
+    BOARD_START_MARKER = "<!-- OMOK:START -->"
+    BOARD_END_MARKER = "<!-- OMOK:END -->"
     
     def __init__(self):
         """Initialize the README updater."""
@@ -85,33 +85,30 @@ class ReadmeUpdater:
             return False
             
     def _generate_board_section(self) -> str:
-        """
-        Generate the new board section content.
-        
-        Returns:
-            str: New board section with text representation
-        """
-        # Load current game state
-        if not self.generator.game_state.load_state():
+        """Generate a compact status and a clickable Markdown board."""
+        state = self.generator.game_state
+        if not state.load_state():
             return "Error: Could not load game state\n"
-            
-        board_text = self.generator.generate_board_text()
-        status_text = self.generator.generate_status_message()
-        
-        # Create the complete section
-        section_lines = [
-            "### Current Game State\n",
-            "\n",
-            "```\n",
-            f"{board_text}\n",
-            "```\n",
-            "\n",
-            f"{status_text}\n",
-            "\n"
-        ]
-        
-        return "".join(section_lines)
-        
+
+        if state.winner:
+            status = f"🏆 {state.winner.value.title()} wins!"
+        elif state.game_status.value == "draw":
+            status = "Draw"
+        else:
+            status = f"{'⚫ Black' if state.current_player.value == 'black' else '⚪ White'} to move"
+
+        last = "—"
+        if state.last_move:
+            row, col = state.last_move
+            last = f"{chr(ord('A') + col)}{row + 1}"
+
+        board = self.generator.generate_clickable_board()
+        return (
+            f"**{status}** · {state.move_count} moves · Last move: {last}\n\n"
+            "Select **＋** to choose a position, then submit the pre-filled issue.\n\n"
+            f"{board}\n"
+        )
+
     def _replace_board_section(self, content: List[str], new_section: str) -> List[str]:
         """
         Replace the board section in README content.
@@ -143,7 +140,7 @@ class ReadmeUpdater:
             return content
             
         # Replace the section
-        updated_content = content[:start_idx]
+        updated_content = content[:start_idx + 1]
         updated_content.extend(new_section.splitlines(keepends=True))
         updated_content.extend(content[end_idx:])
         
