@@ -72,6 +72,32 @@ class TextBoardGenerator:
         
         return "\n".join(lines)
         
+    def generate_clickable_board(self) -> str:
+        """Render a 15x15 Markdown board with pre-filled issue links for empty cells."""
+        if not self.game_state.load_state():
+            return "Error: Could not load game state"
+
+        columns = [chr(ord('A') + i) for i in range(GameState.BOARD_SIZE)]
+        lines = [
+            "|  | " + " | ".join(columns) + " |",
+            "| :---: | " + " | ".join([":---:"] * GameState.BOARD_SIZE) + " |",
+        ]
+        issue_url = "https://github.com/mousepotato03/mousepotato03/issues/new"
+
+        for row_idx, row in enumerate(self.game_state.board):
+            cells = []
+            for col_idx, stone in enumerate(row):
+                if stone == Player.BLACK.value:
+                    cells.append("⚫")
+                elif stone == Player.WHITE.value:
+                    cells.append("⚪")
+                else:
+                    coord = f"{columns[col_idx]}{row_idx + 1}"
+                    cells.append(f'[＋]({issue_url}?title={coord} "Play at {coord}")')
+            lines.append(f"| {row_idx + 1} | " + " | ".join(cells) + " |")
+
+        return "\n".join(lines)
+
     def _get_cell_content(self, row: int, col: int) -> str:
         """
         Get the content for a specific cell.
